@@ -23,12 +23,14 @@ if (isset($_POST["add"]))//getting the form data
     $query="SELECT * FROM patients WHERE SSN='$ssn'";
     $result=mysqli_query($conn,$query);
 
-    if(mysqli_num_rows($results)>0){
+    if(mysqli_num_rows($result)>0){
 
         //display message that the records exists
         echo '<script>alert("Patient already exists")</script>';
     }
     else{
+
+      //INSERT PATIENT INFORMATION
         $insert="INSERT INTO patients(SSN,Name,Address,Age,Username,Password) VALUES('$ssn','$name','$address','$age','$username','$password')";
         mysqli_query($conn,$insert);
         echo '<script>alert("Patient information inserted succesfully")</script>';

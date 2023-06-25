@@ -16,16 +16,17 @@ $password=mysqli_real_escape_string($conn,$Post["Password"]);
 
 //querying database to see if the information exists
 $query="SELECT * FROM doctors WHERE SSN='$dssn'";
-$results=mysqli_query($conn,$query);
+$result=mysqli_query($conn,$query);
 
 
-if(mysqli_num_rows($results)>0){
+if(mysqli_num_rows($result)>0){
 
 //display message that the record already exist
 echo'<script>alert("doctor already exists")</script>';
 
 }
 else{
+    //INSERT DOCTOR'S INFORMATION
     $insert="INSERT INTO doctors(SSN,Name,Specialty,ExperienceYears,Username,Password) VALUES('$dssn','$name','$specialty','$yoExperience','$username','$password') ";
     mysqli_query($conn,$insert);
     echo '<script>alert("Patient information inserted succesfully")</script>';

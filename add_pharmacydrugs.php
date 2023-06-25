@@ -22,6 +22,7 @@ echo'<script>alert("drug already exist")</script>';
 
 }
 else{
+    //INSERT PHARMACY DRUG INFORMATION
 
 $insert="INSERT INTO pharmacydrugs(PharmacyName,TradeName,Price) VALUES ('$phName','$tradeName','$price')";
 mysqli_query($conn,$query);

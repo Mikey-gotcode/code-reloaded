@@ -23,6 +23,7 @@ echo'<script>alert("pharmacy already exists")</script>';
 
 }
 else{
+    //INSERT PHARMACY INFORMATION
 
 $insert="INSERT INTO pharmacy(Name,Address,PhoneNumber) VALUES('$name','$address','$phNumber')";
 mysqli_query($conn,$query);
