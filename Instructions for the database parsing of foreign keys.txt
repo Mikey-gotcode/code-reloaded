@@ -1,0 +1,7 @@
+Instructions for database parsing
+
+1. The required attribute added in the input fields checks if all fields with this attribute are filled and the form data will not be posted if one of the fields is empty. This eliminates the need for form validation
+2. I have renamed the add_contracts.html to add_contracts.php for easy form handling purposes. The reason is because the redirect function was not working. The earlier file still exists under add_contracts_old.php
+3. To add contracts, first ensure that the pharmaceuticalcompanies and pharmacies databases have data, and that the information submitted in the Pharmaceutical company name and the pharmacy name correspond to the information in the earlier-mentioned tables(This is because of the foreign key constraint that has been put in place)
+
+All the best!
