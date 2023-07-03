@@ -1,0 +1,46 @@
+<html>
+<html lang="en">
+<head>
+<link rel="stylesheet" type="css" href="style.css">
+</head>
+<style>
+
+</style>
+<body>
+<div class="form-wrsignup">
+<h2>Add Product Details</h2>
+<form action="#" method="post">
+<table cellspacing ="20" >
+<tr>
+<td> Product ID</td>
+<td><input type="text" name="id" required="required" value="<?php echo "$id";?>" placeholder="Id" autofocus required></input></td>
+</tr> 
+<tr>
+<td> Medicine Nmae</td>
+<td><input type="text" name="name" required="required" value="<?php echo "$_GET[mn]";?>" placeholder="Medicine Name"  autofocus required></input></td>
+</tr>  
+<tr>
+<td>Company Name</td>
+<td><select id="" name="companyname">
+            <?php echo $options;?>
+        </select></td>
+        </tr>
+        
+<tr>
+<td>Quantity</td>
+<td><input type="text" name="quantity" required="required" value="<?php echo "$qt";?>" placeholder="Quantity" required></input></td>
+        </tr>
+        
+<tr>
+<td>Price perunit</td>
+<td><input type="text" name="price" required="required" value="<?php echo "$rs";?>" placeholder="Price per unit" required></input></td>
+</tr>
+<tr>
+<td>Expiry date</td>
+<td><input type="date" name="date" required="required" value="<?php echo "$_GET[ed]"; ?>" placeholder="Expiry Date" required></input></td>
+        </tr>
+        <tr>
+		<td colspan="2" align ="center"><input type="submit"  class="Button" title="update" name="update" value="Add"></input></td>
+   </tr> 
+    </table>
+ 

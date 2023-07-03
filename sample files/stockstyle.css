@@ -1,0 +1,97 @@
+table
+{
+    width: 600px;
+    height: 200px;
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    border-radius: 10px;
+    color:black;
+    border : 0;
+    background-color:;
+    align: center;  
+    font-size: 15px;
+    font-weight: 600;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
+.Button
+{
+     position: absolute;
+     background: #337ab7;
+     font-size: 20px;
+     font-weight: 600;
+     color: #fff;
+     -webkit-appearance: button;
+     -moz-appearance: button;
+     appearance: button;
+    
+}
+.Button:hover
+{
+     background-color: #1d1f77;
+}
+.form-wrsignup 
+{
+    position: absolute;
+     background:#f9f9fa;
+     top: 70px;
+     left: 250px;
+     height: 83%;
+     width:77%;
+     padding: 15px 25px;
+     box-shadow: 0px 1px 0px rgba(36, 39, 219, 0.6),inset 0px 1px 0px rgba(255,255,255,0.04);
+     font-size: 15px;
+     font-weight: 600;
+     color: #fff;
+}
+.form
+{
+    position: absolute;
+     background:  White;
+     top: 40px;
+     left:20px;
+     height: 83%;
+     width:80%;
+     padding: 15px 25px;
+ 
+ 
+}
+h2
+{
+     color:black;
+}
+input[type=text] 
+{
+    width: 100%;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: white;
+        background-position: 10px 10px; 
+        background-repeat: no-repeat;
+        padding: 12px 20px 12px 40px;
+}
+
+
+
+
+
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #333;
+            color: white;
+        }
+    </style>

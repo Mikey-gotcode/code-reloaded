@@ -52,7 +52,7 @@ else{
     <title>Document</title>
 </head>
 <body>
-    <form action="add_doctors" method="post">
+    <form action="doctors.php" method="post">
         <label>Doctor Social Security</label>
         <input type="number" name="SSN"  placeholder="DSSN">
         <label>Name</label>

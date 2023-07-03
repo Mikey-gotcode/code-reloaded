@@ -14,8 +14,8 @@ if (isset($_POST["add"]))//getting the form data
     $name=mysqli_real_escape_string($conn,$_POST['Name']);
     $address=mysqli_real_escape_string($conn,$_POST['Address']);
     $age=mysqli_real_escape_string($conn,$_POST['Age']);
-    $username=mysqli_real_escape_string($conn,$_POST['Username']);
-    $password=mysqli_real_escape_string($conn,$_POST['Password']);
+    //$username=mysqli_real_escape_string($conn,$_POST['Username']);
+    //$password=mysqli_real_escape_string($conn,$_POST['Password']);
 
 
 
@@ -31,7 +31,7 @@ if (isset($_POST["add"]))//getting the form data
     else{
 
       //INSERT PATIENT INFORMATION
-        $insert="INSERT INTO patients(SSN,Name,Address,Age,Username,Password) VALUES('$ssn','$name','$address','$age','$username','$password')";
+        $insert="INSERT INTO patients(SSN,Name,Address,Age) VALUES('$ssn','$name','$address','$age')";
         mysqli_query($conn,$insert);
         echo '<script>alert("Patient information inserted succesfully")</script>';
 

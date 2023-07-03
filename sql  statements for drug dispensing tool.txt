@@ -1,0 +1,88 @@
+CREATE TABLE Patients (
+  SSN INT PRIMARY KEY,
+  Name VARCHAR(100),
+  Address VARCHAR(100),
+  Age INT
+);
+
+CREATE TABLE Doctors (
+  SSN INT PRIMARY KEY,
+  Name VARCHAR(100),
+  Specialty VARCHAR(100),
+  ExperienceYears INT
+);
+
+
+CREATE TABLE PharmaceuticalCompanies (
+  Name VARCHAR(100) PRIMARY KEY,
+  PhoneNumber VARCHAR(20)
+);
+
+
+CREATE TABLE Drugs (
+  TradeName VARCHAR(100),
+  Formula VARCHAR(100),
+  CompanyName VARCHAR(100),
+  PRIMARY KEY (TradeName, CompanyName),
+  FOREIGN KEY (CompanyName) REFERENCES PharmaceuticalCompanies (Name) ON DELETE CASCADE
+);
+
+
+CREATE TABLE Pharmacies (
+  Name VARCHAR(100) PRIMARY KEY,
+  Address VARCHAR(100),
+  PhoneNumber VARCHAR(20)
+);
+
+CREATE TABLE PatientsDoctors (
+  PatientSSN INT,
+  DoctorSSN INT,
+  PRIMARY KEY (PatientSSN, DoctorSSN),
+  FOREIGN KEY (PatientSSN) REFERENCES Patients (SSN),
+  FOREIGN KEY (DoctorSSN) REFERENCES Doctors (SSN)
+);
+
+
+CREATE TABLE PharmacyDrugs (
+  PharmacyName VARCHAR(100),
+  TradeName VARCHAR(100),
+  Price DECIMAL(10,2),
+  PRIMARY KEY (PharmacyName, TradeName),
+  FOREIGN KEY (PharmacyName) REFERENCES Pharmacies (Name),
+  FOREIGN KEY (TradeName) REFERENCES Drugs (TradeName)
+);
+
+CREATE TABLE Prescriptions (
+  PrescriptionID INT PRIMARY KEY,
+  DoctorSSN INT,
+  PatientSSN INT,
+  DrugTradeName VARCHAR(100),
+  PrescriptionDate DATE,
+  Quantity INT,
+  FOREIGN KEY (DoctorSSN) REFERENCES Doctors (SSN),
+  FOREIGN KEY (PatientSSN) REFERENCES Patients (SSN),
+  FOREIGN KEY (DrugTradeName) REFERENCES Drugs (TradeName)
+);
+
+
+CREATE TABLE Contracts (
+  ContractID INT PRIMARY KEY,
+  PharmaceuticalCompanyName VARCHAR(100),
+  PharmacyName VARCHAR(100),
+  StartDate DATE,
+  EndDate DATE,
+  ContractText TEXT,
+  FOREIGN KEY (PharmaceuticalCompanyName) REFERENCES PharmaceuticalCompanies (Name),
+  FOREIGN KEY (PharmacyName) REFERENCES Pharmacies (Name)
+);
+
+CREATE TABLE Supervisors (
+  ContractID INT PRIMARY KEY,
+  SupervisorName VARCHAR(100),
+  FOREIGN KEY (ContractID) REFERENCES Contracts (ContractID)
+);
+
+
+
+
+
