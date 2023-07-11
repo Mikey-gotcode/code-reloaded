@@ -1,60 +1,50 @@
 <?php 
 session_start();
-include "./dbcon.php";
+include "dbcon.php";
 
+if(isset($_POST["add"])) {
+    // Get the form data
+    $contractID = $_POST['ContractID'];
+    $supervisorName = $_POST['SupervisorName'];
 
+    // Check if the contract already has a supervisor
+    $query = "SELECT * FROM supervisor WHERE ContractID = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "s", $contractID);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
-if(isset($_POST["add"]))//getting data from form
-{
+    if (mysqli_num_rows($result) > 0) {
+        // Display message that the contract already has a supervisor
+        echo '<script>alert("Contract Already Has a Supervisor")</script>';
+    } else {
+        // Insert supervisor information using prepared statement
+        $insert = "INSERT INTO supervisor (ContractID, Supervisor) VALUES (?, ?)";
+        $stmt = mysqli_prepare($conn, $insert);
+        mysqli_stmt_bind_param($stmt, "ss", $contractID, $supervisorName);
+        mysqli_stmt_execute($stmt);
 
-$contractID=mysqli_real_escape_string($conn,$_POST['ContractID']);
-$supervisorName=mysqli_real_escape_string($conn,$_POST['SupervisorName']);
+        echo '<script>alert("Inserted new supervisor information")</script>';
+    }
 
-
-
-$query="SELECT * FROM supervisor WHERE ContractID='$contractID' ";
-$result=mysqli_query($conn,$$query);
-
-
-if(mysqli_num_rows($result)>0)
-{
-
-    //display that contract already exists
-echo'<script>alert("Contract Already Exists")</script>';
-
+    mysqli_stmt_close($stmt);
 }
-else{
-
-//insert supervisors information
-
-$insert="INSERT INTO supervisor (ContractID,Supervisor) VALUES('$contractID','$supervisorName')";
-mysqli_query($conn,$insert);
-echo'<script>alert("Inserted new supervisor information")</script>';
-
-
-
-
-}
-
-
-}
-
-
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add Supervisor</title>
 </head>
 <body>
-    <label>Contract ID:</label>
-    <input type="number" name="ContractID" placeholder="Contract ID">
-    <label>Supervisor Name:</label>
-    <input type="text" name="SupervisorName" placeholder="Supervisor Name">
-    <button type="submit" name="add">ADD SUPERVISOR</button>
+    <form method="post" action="">
+        <label>Contract ID:</label>
+        <input type="number" name="ContractID" placeholder="Contract ID" required>
+        <label>Supervisor Name:</label>
+        <input type="text" name="SupervisorName" placeholder="Supervisor Name" required>
+        <button type="submit" name="add">ADD SUPERVISOR</button>
+    </form>
 </body>
 </html>

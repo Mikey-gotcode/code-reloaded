@@ -1,80 +1,65 @@
 <?php 
 session_start();
-include "./dbcon.php";
+include "dbcon.php";
 
+if(isset($_POST["add"])) {
+    // Get the form data
+    $prescriptionID = $_POST['PrescriptionSSN'];
+    $doctorSSN = $_POST['DoctorSSN'];
+    $patientSSN = $_POST['PatientSSN'];
+    $drugTName = $_POST['DrugTradeName'];
+    $prescriptionDate = $_POST['PrescriptionDate'];
+    $quantity = $_POST['Quantity'];
+    $description = $_POST['Description'];
 
+    // Check if the prescription already exists for the patient
+    $query = "SELECT * FROM prescription WHERE PrescriptionID = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "s", $prescriptionID);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
-if(isset($_POST["add"]))//getting data from form
-{
-$prescriptionID=mysqli_real_escape_string($conn,$_POST['PrescriptionSSN']);
-$doctorSSN=mysqli_real_escape_string($conn,$_POST['DoctorSSN']);
-$patientSSN=mysqli_real_escape_string($conn,$_POST['PatientSSN']);
-$drugTName=mysqli_real_escape_string($conn,$_POST['DrugTradeName']);
-$prescriptionDate=mysqli_real_escape_string($conn,$_POST['PrescriptionDate']);
-$quantity=mysqli_real_escape_string($conn,$_POST['Quantity']);
-$description=mysqli_real_escape_string($conn,$_POST['Description']);
+    if (mysqli_num_rows($result) > 0) {
+        // Display message that the prescription already exists
+        echo '<script>alert("Prescription already exists")</script>';
+    } else {
+        // Insert prescription information using prepared statement
+        $insert = "INSERT INTO prescription (PrescriptionID, DoctorSSN, PatientSSN, DrugTradeName, PrescriptionDate, Quantity, Description) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $insert);
+        mysqli_stmt_bind_param($stmt, "sssssss", $prescriptionID, $doctorSSN, $patientSSN, $drugTName, $prescriptionDate, $quantity, $description);
+        mysqli_stmt_execute($stmt);
 
+        echo '<script>alert("Patient prescription record successfully added.")</script>';
+    }
 
-$query="SELECT * FROM prescription WHERE PatientSSN='$patientSSN'";
-$result=mysqli_query($conn,$query);
-
-
-if(mysqli_num_rows($result)>0)
-{
-
-//display that Patient/Prescription doesnt exist
-echo'<script>alert("")</script>';
-
+    mysqli_stmt_close($stmt);
 }
-else{
-
-    //INSERT PRESCRIPTION INFORMATION
-
-    $insert="INSERT INTO prescription (PrescriptionID,DoctorSSN,PatientSSN,DrugTradeName,PrescriptionDate,Quantity,Description) VALUES('$prescriptionID','$doctorSSN','$patientSSN','$drugTNAME','$prescriptionDate','$quantity','$description')";
-    mysqli_query($conn,$insert);
-
-
-    echo'<script>alert("patient prescription record successfully added.")</script>';
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add Prescription</title>
 </head>
 <body>
-    <label>Prescription ID:</label>
-    <input type="number" name="PrescriptionSSN" placeholder="Prescription SSN">
-    <label>Doctor SSN:</label>
-    <input type="number" name="DoctorSSN" placeholder="Doctor SSN">
-    <label>Patient SSN:</label>
-    <input type="number" name="PatientSSN" placeholder="Patient SSN">
-    <label>Drug Trade Name:</label>
-    <input type="text" name="DrugTradeName" placeholder="Drug Trade Name">
-    <label>Prescription Date:</label>
-    <input type="date" name="PrescriptionDate" placeholder="Prescription Date">
-    <label>Quantity:</label>
-    <input type="number" name="Quantity" placeholder="Quantity">
-    <label>Description:</label>
-    <input type="text" name="Description" placeholder="Description">
-    <button type="submit" name="add">ADD PRESCRIPTION</button>
+    <form method="post" action="">
+        <label>Prescription ID:</label>
+        <input type="number" name="PrescriptionSSN" placeholder="Prescription SSN" required>
+        <label>Doctor SSN:</label>
+        <input type="number" name="DoctorSSN" placeholder="Doctor SSN" required>
+        <label>Patient SSN:</label>
+        <input type="number" name="PatientSSN" placeholder="Patient SSN" required>
+        <label>Drug Trade Name:</label>
+        <input type="text" name="DrugTradeName" placeholder="Drug Trade Name" required>
+        <label>Prescription Date:</label>
+        <input type="date" name="PrescriptionDate" placeholder="Prescription Date" required>
+        <label>Quantity:</label>
+        <input type="number" name="Quantity" placeholder="Quantity" required>
+        <label>Description:</label>
+        <input type="text" name="Description" placeholder="Description" required>
+        <button type="submit" name="add">ADD PRESCRIPTION</button>
+    </form>
 </body>
 </html>

@@ -1,81 +1,57 @@
-<?php 
-session_start(); 
-include "./dbcon.php";
+<?php
+session_start();
+include "dbcon.php";
 
+if (isset($_POST["add"])) {
+    // Get the form data
+    $ssn = $_POST['SSN'];
+    $name = $_POST['Name'];
+    $address = $_POST['Address'];
+    $age = $_POST['Age'];
 
+    // Check if the patient already exists
+    $query = "SELECT * FROM patients WHERE SSN = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "s", $ssn); // Bind the SSN value to the prepared statement
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
-
-if (isset($_POST["add"]))//getting the form data
-{
-
-
-    //initializing the submitted form data
-    $ssn=mysqli_real_escape_string($conn,$_POST['SSN']);
-    $name=mysqli_real_escape_string($conn,$_POST['Name']);
-    $address=mysqli_real_escape_string($conn,$_POST['Address']);
-    $age=mysqli_real_escape_string($conn,$_POST['Age']);
-    //$username=mysqli_real_escape_string($conn,$_POST['Username']);
-    //$password=mysqli_real_escape_string($conn,$_POST['Password']);
-
-
-
-    //querying database to see if the information exists
-    $query="SELECT * FROM patients WHERE SSN='$ssn'";
-    $result=mysqli_query($conn,$query);
-
-    if(mysqli_num_rows($result)>0){
-
-        //display message that the records exists
+    if (mysqli_num_rows($result) > 0) {
+        // Display message that the record already exists
         echo '<script>alert("Patient already exists")</script>';
-    }
-    else{
+    } else {
+        // Insert patient information using prepared statement
+        $insert = "INSERT INTO patients(SSN, Name, Address, Age) VALUES(?, ?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $insert);
+        mysqli_stmt_bind_param($stmt, "sssi", $ssn, $name, $address, $age); // Bind the values to the prepared statement
+        mysqli_stmt_execute($stmt);
 
-      //INSERT PATIENT INFORMATION
-        $insert="INSERT INTO patients(SSN,Name,Address,Age) VALUES('$ssn','$name','$address','$age')";
-        mysqli_query($conn,$insert);
-        echo '<script>alert("Patient information inserted succesfully")</script>';
-
-
-
+        echo '<script>alert("Patient information inserted successfully")</script>';
     }
 
-
-
-
-
-
-
+    mysqli_stmt_close($stmt);
 }
-  
-?>
 
+?>
 
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>patients addition table</title>
+    <title>Patients Addition Form</title>
   </head>
   <body>
     <form action="add_patients.php" method="post">
-      <h1>add patients</h1>
-    <label>Social security number</label>
-    <input type="number" name="SSN" placeholder="SSN">
-    <label>Name</label>
-    <input type="text" name="Name" placeholder="Name">
-    <label>Address</label>
-    <input type="text" name="Address" placeholder="Address">
-    <label>Age</label>
-    <input type="number" name="Age" placeholder="Age">
-    <label>Username</label>
-    <input type="text" name="Username" placeholder="Username">  
-    <label>Password</label>
-    <input type="password" name="Password" placeholder="Password">
-    <button type="submit">ADD NEW PATIENT</button>
-
+      <h1>Add Patients</h1>
+      <label>Social Security Number</label>
+      <input type="number" name="SSN" placeholder="SSN" required>
+      <label>Name</label>
+      <input type="text" name="Name" placeholder="Name" required>
+      <label>Address</label>
+      <input type="text" name="Address" placeholder="Address" required>
+      <label>Age</label>
+      <input type="number" name="Age" placeholder="Age" required>
+      <button type="submit" name="add">Add New Patient</button>
     </form>
-
-
-   
   </body>
 </html>
