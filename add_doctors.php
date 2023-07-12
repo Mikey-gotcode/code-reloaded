@@ -45,7 +45,7 @@ if (isset($_POST["add"])) {
     <title>Add Doctor</title>
 </head>
 <body>
-    <form action="doctors.php" method="post">
+    <form action="add_doctors.php" method="post">
         <label>Doctor Social Security</label>
         <input type="number" name="SSN" placeholder="DSSN" required>
         <label>Name</label>
