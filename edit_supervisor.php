@@ -24,3 +24,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["edit"])) {
     mysqli_stmt_close($stmt);
 }
 ?>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Supervisor Information</title>
+</head>
+<body>
+    <form action="update_supervisor.php" method="post">
+        <h1>Edit Supervisor Information</h1>
+        <label>Supervisor ID:</label>
+        <input type="number" name="SupervisorID" placeholder="Supervisor ID" required>
+        <label>Contract ID:</label>
+        <input type="number" name="ContractID" placeholder="Contract ID" required>
+        <label>Supervisor Name:</label>
+        <input type="text" name="SupervisorName" placeholder="Supervisor Name" required>
+        <button type="submit" name="edit">Update Supervisor</button>
+    </form>
+</body>
+</html>
+

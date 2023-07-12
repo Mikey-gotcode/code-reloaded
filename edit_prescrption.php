@@ -28,3 +28,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["edit"])) {
     mysqli_stmt_close($stmt);
 }
 ?>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Prescription Information</title>
+</head>
+<body>
+    <form action="update_prescription.php" method="post">
+        <h1>Edit Prescription Information</h1>
+        <label>Prescription ID:</label>
+        <input type="number" name="PrescriptionID" placeholder="Prescription ID" required>
+        <label>Doctor SSN:</label>
+        <input type="number" name="DoctorSSN" placeholder="Doctor SSN" required>
+        <label>Patient SSN:</label>
+        <input type="number" name="PatientSSN" placeholder="Patient SSN" required>
+        <label>Drug Trade Name:</label>
+        <input type="text" name="DrugTradeName" placeholder="Drug Trade Name" required>
+        <label>Prescription Date:</label>
+        <input type="date" name="PrescriptionDate" placeholder="Prescription Date" required>
+        <label>Quantity:</label>
+        <input type="number" name="Quantity" placeholder="Quantity" required>
+        <label>Description:</label>
+        <input type="text" name="Description" placeholder="Description" required>
+        <button type="submit" name="edit">Update Prescription</button>
+    </form>
+</body>
+</html>
+

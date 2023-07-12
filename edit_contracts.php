@@ -27,3 +27,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["edit"])) {
     mysqli_stmt_close($stmt);
 }
 ?>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Contract Information</title>
+</head>
+<body>
+    <form action="update_contract.php" method="post">
+        <h1>Edit Contract Information</h1>
+        <label>Contract ID:</label>
+        <input type="number" name="ContractID" placeholder="Contract ID" required>
+        <label>Pharmaceutical Company Name:</label>
+        <input type="text" name="PharmaceuticalCompanyName" placeholder="Pharmaceutical Company Name" required>
+        <label>Pharmacy Name:</label>
+        <input type="text" name="PharmacyName" placeholder="Pharmacy Name" required>
+        <label>Start Date:</label>
+        <input type="date" name="StartDate" placeholder="Start Date" required>
+        <label>End Date:</label>
+        <input type="date" name="EndDate" placeholder="End Date" required>
+        <label>Contract Text:</label>
+        <input type="text" name="ContractText" placeholder="Contract Text" required>
+        <button type="submit" name="edit">Update Contract</button>
+    </form>
+</body>
+</html>
