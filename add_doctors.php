@@ -10,11 +10,14 @@ if (isset($_POST["add"])) {
     $yoExperience = $_POST['ExperienceYears'];
     $username = $_POST['Username'];
     $password = $_POST['Password'];
+    $phonenumber=$_POST['Phonenumber'];
+
+    print_r($_POST);
 
     // Check if the doctor already exists
     $query = "SELECT * FROM doctors WHERE SSN = ?";
     $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "s", $dssn);
+    mysqli_stmt_bind_param($stmt, "i", $dssn);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
@@ -23,12 +26,12 @@ if (isset($_POST["add"])) {
         echo '<script>alert("Doctor already exists")</script>';
     } else {
         // Insert doctor's information using prepared statement
-        $insert = "INSERT INTO doctors(SSN, Name, Specialty, ExperienceYears, Username, Password) VALUES(?, ?, ?, ?, ?, ?)";
+        $insert = "INSERT INTO doctors(SSN, Name, Specialty, ExperienceYears, Username, Password,Phonenumber) VALUES(?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $insert);
-        mysqli_stmt_bind_param($stmt, "ssssss", $dssn, $name, $specialty, $yoExperience, $username, $password);
+        mysqli_stmt_bind_param($stmt, "ississi", $dssn, $name, $specialty, $yoExperience, $username, $password, $phonenumber);
         mysqli_stmt_execute($stmt);
 
-        echo '<script>alert("Doctor information inserted successfully")</script>';
+        echo '<script>alert("'.htmlspecialchars("Doctor information inserted successfully").'")</script>';
     }
 
     mysqli_stmt_close($stmt);
@@ -43,22 +46,80 @@ if (isset($_POST["add"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Doctor</title>
+    <style>
+        .formdiv{
+            position:relative;
+            border:5px outset red;
+            background-color: lightblue;
+            text-align:left;
+            top:70px;
+            left:25px;
+            height:83%;
+            width:45%;
+            padding:15px 25px;
+
+
+
+        }
+        .form{
+            position: absolute;
+            background:  White;
+            top: 40px;
+            left:20px;
+            height: 83%;
+            width:80%;
+            padding: 15px 25px;
+
+
+        }
+       
+
+
+
+
+    </style>
 </head>
 <body>
-    <form action="add_doctors.php" method="post">
-        <label>Doctor Social Security</label>
-        <input type="number" name="SSN" placeholder="DSSN" required>
-        <label>Name</label>
-        <input type="text" name="Name" placeholder="Name" required>
-        <label>Specialty</label>
-        <input type="text" name="Specialty" placeholder="Specialty" required>
-        <label>Years of Experience</label>
-        <input type="number" name="ExperienceYears" placeholder="ExperienceYears" required>
-        <label>Username</label>
-        <input type="text" name="Username" placeholder="Username" required>
-        <label>Password</label>
-        <input type="text" name="Password" placeholder="Password" required>
+    <div class="formdiv">
+        <h3>Add doctors information</h3>
+    <form action="#" method="post">
+        <table>
+            <tr>
+                <td> 
+                     <label>Doctor Social Security</label>
+                </td>
+                <td>
+                    <input type="number" name="SSN" placeholder="DSSN" required>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Name</label></td>
+                <td><input type="text" name="Name" placeholder="Name" required></td>
+            </tr>
+            <tr>
+                <td><label>Specialty</label></td>
+                <td><input type="text" name="Specialty" placeholder="Specialty" required></td>
+            </tr>
+            <tr>
+                <td> <label>Years of Experience</label></td>
+                <td><input type="number" name="ExperienceYears" placeholder="Experience in Years" required></td>
+            </tr>
+            <tr>
+                <td><label>Username</label></td>
+                <td><input type="text" name="Username" placeholder="Username" required></td>
+            </tr>
+            <tr>
+                <td><label>Password</label></td>
+                <td><input type="text" name="Password" placeholder="Password" required></td>
+            </tr>
+            <tr>
+                <td><label>Phone number:</label></td>
+                <td><input type="number" name="Phonenumber" placeholder="Phone-number" required></td>
+            </tr>
+        </table>
         <button type="submit" name="add">Add Doctor</button>
     </form>
+
+    </div>
 </body>
 </html>

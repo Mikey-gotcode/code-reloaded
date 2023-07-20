@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "mysql";
 $dbname = "drug_dispensary_tool";
 
 // Create connection
