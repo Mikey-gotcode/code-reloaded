@@ -5,9 +5,10 @@ include "dbcon.php";
 if (isset($_POST["add"])) {
     // Get the form data
     $dssn = $_POST['SSN'];
-    $name = $_POST['Name'];
+    $fname = $_POST['Firstname'];
+    $lname=$_POST['Lastname'];
     $specialty = $_POST['Specialty'];
-    $yoExperience = $_POST['ExperienceYears'];
+    //$yoExperience = $_POST['ExperienceYears'];
     $username = $_POST['Username'];
     $password = $_POST['Password'];
     $phonenumber=$_POST['Phonenumber'];
@@ -15,7 +16,7 @@ if (isset($_POST["add"])) {
     print_r($_POST);
 
     // Check if the doctor already exists
-    $query = "SELECT * FROM doctors WHERE SSN = ?";
+    $query = "SELECT * FROM `doctors` WHERE SSN = ?";
     $stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($stmt, "i", $dssn);
     mysqli_stmt_execute($stmt);
@@ -26,9 +27,9 @@ if (isset($_POST["add"])) {
         echo '<script>alert("Doctor already exists")</script>';
     } else {
         // Insert doctor's information using prepared statement
-        $insert = "INSERT INTO doctors(SSN, Name, Specialty, ExperienceYears, Username, Password,Phonenumber) VALUES(?, ?, ?, ?, ?, ?, ?)";
+        $insert = "INSERT INTO doctors(SSN, Firstname,Lastname, Specialty,  Username, Password,Phonenumber) VALUES(?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $insert);
-        mysqli_stmt_bind_param($stmt, "ississi", $dssn, $name, $specialty, $yoExperience, $username, $password, $phonenumber);
+        mysqli_stmt_bind_param($stmt, "issssii", $dssn, $fname,$lname, $specialty, $username, $password, $phonenumber);
         mysqli_stmt_execute($stmt);
 
         echo '<script>alert("'.htmlspecialchars("Doctor information inserted successfully").'")</script>';
@@ -93,17 +94,18 @@ if (isset($_POST["add"])) {
                 </td>
             </tr>
             <tr>
-                <td><label>Name</label></td>
-                <td><input type="text" name="Name" placeholder="Name" required></td>
+                <td><label>Firstname</label></td>
+                <td><input type="text" name="Firstname" placeholder="firstName" required></td>
+            </tr>
+            <tr>
+                <td> <label>Lastname</label></td>
+                <td><input type="text" name="Lastname" placeholder="Lastname" required></td>
             </tr>
             <tr>
                 <td><label>Specialty</label></td>
                 <td><input type="text" name="Specialty" placeholder="Specialty" required></td>
             </tr>
-            <tr>
-                <td> <label>Years of Experience</label></td>
-                <td><input type="number" name="ExperienceYears" placeholder="Experience in Years" required></td>
-            </tr>
+           
             <tr>
                 <td><label>Username</label></td>
                 <td><input type="text" name="Username" placeholder="Username" required></td>

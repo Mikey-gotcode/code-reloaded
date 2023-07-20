@@ -3,17 +3,19 @@ session_start();
 include "dbcon.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["edit"])) {
-    $doctorID = $_POST["DoctorID"];
-    $name = $_POST["Name"];
+    $dssn = $_POST["SSN"];
+    $fname = $_POST["Firstname"];
+    $lname=$_POST['Lastname'];
     $specialty = $_POST["Specialty"];
-    $experienceYears = $_POST["ExperienceYears"];
+    //$experienceYears = $_POST["ExperienceYears"];
     $username = $_POST["Username"];
     $password = $_POST["Password"];
+    $phonenumber=$_POST['Phonenumber'];
 
     // Update doctor's information
-    $update = "UPDATE doctors SET Name = ?, Specialty = ?, ExperienceYears = ?, Username = ?, Password = ? WHERE DoctorID = ?";
+    $update = "UPDATE doctors SET Firstname = ?,Lastname=?, Specialty = ?, Username = ?, Password = ? ,Phonenumber=?,WHERE SSN = ?";
     $stmt = mysqli_prepare($conn, $update);
-    mysqli_stmt_bind_param($stmt, "sssssi", $name, $specialty, $experienceYears, $username, $password, $doctorID);
+    mysqli_stmt_bind_param($stmt, "sssssii", $fname,$lname, $specialty, $username, $password,$Phonenumber, $dssn);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
@@ -21,11 +23,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["edit"])) {
 }
 
 // Retrieve the doctor's information for editing
-if (isset($_GET["doctorID"])) {
-    $doctorID = $_GET["doctorID"];
+if (isset($_GET["SSN"])) {
+    $doctorID = $_GET["SSN"];
 
     // Retrieve the doctor's information from the database
-    $query = "SELECT * FROM doctors WHERE DoctorID = ?";
+    $query = "SELECT * FROM doctors WHERE SSN = ?";
     $stmt = mysqli_prepare($conn, $query);
     mysqli_stmt_bind_param($stmt, "i", $doctorID);
     mysqli_stmt_execute($stmt);
@@ -34,12 +36,14 @@ if (isset($_GET["doctorID"])) {
 
     // Check if the doctor exists
     if ($row) {
-        $doctorID = $row["DoctorID"];
-        $name = $row["Name"];
+        $doctorID = $row["SSN"];
+        $fname = $row["Firstname"];
+        $lname=$_POST['Lastname'];
         $specialty = $row["Specialty"];
-        $experienceYears = $row["ExperienceYears"];
+       // $experienceYears = $row["ExperienceYears"];
         $username = $row["Username"];
         $password = $row["Password"];
+        $phonenumber=$_POST['Phonenumber'];
     } else {
         // Doctor not found
         echo '<script>alert("Doctor not found")</script>';
@@ -65,19 +69,47 @@ if (isset($_GET["doctorID"])) {
     <title>Edit Doctor</title>
 </head>
 <body>
-    <form action="edit_doctors.php" method="post">
-        <input type="hidden" name="DoctorID" value="<?php echo $doctorID; ?>">
-        <label>Name</label>
-        <input type="text" name="Name" placeholder="Name" value="<?php echo $name; ?>" required>
-        <label>Specialty</label>
-        <input type="text" name="Specialty" placeholder="Specialty" value="<?php echo $specialty; ?>" required>
-        <label>Years of Experience</label>
-        <input type="number" name="ExperienceYears" placeholder="ExperienceYears" value="<?php echo $experienceYears; ?>" required>
-        <label>Username</label>
-        <input type="text" name="Username" placeholder="Username" value="<?php echo $username; ?>" required>
-        <label>Password</label>
-        <input type="text" name="Password" placeholder="Password" value="<?php echo $password; ?>" required>
-        <button type="submit" name="edit">Update Doctor</button>
+<div class="formdiv">
+        <h3>Add doctors information</h3>
+    <form action="#" method="post">
+        <table>
+            <tr>
+                <td> 
+                     <label>Doctor Social Security</label>
+                </td>
+                <td>
+                    <input type="hidden" name="SSN" placeholder="DSSN" required>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Firstname</label></td>
+                <td><input type="text" name="Firstname" placeholder="firstName" required></td>
+            </tr>
+            <tr>
+                <td> <label>Lastname</label></td>
+                <td><input type="text" name="Lastname" placeholder="Lastname" required></td>
+            </tr>
+            <tr>
+                <td><label>Specialty</label></td>
+                <td><input type="text" name="Specialty" placeholder="Specialty" required></td>
+            </tr>
+           
+            <tr>
+                <td><label>Username</label></td>
+                <td><input type="text" name="Username" placeholder="Username" required></td>
+            </tr>
+            <tr>
+                <td><label>Password</label></td>
+                <td><input type="text" name="Password" placeholder="Password" required></td>
+            </tr>
+            <tr>
+                <td><label>Phone number:</label></td>
+                <td><input type="number" name="Phonenumber" placeholder="Phone-number" required></td>
+            </tr>
+        </table>
+        <button type="submit" name="add">Add Doctor</button>
     </form>
+
+    </div>
 </body>
 </html>

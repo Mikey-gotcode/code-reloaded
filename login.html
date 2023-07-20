@@ -4,22 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIN</title>
+    <style>
+
+    </style>
     
 </head>
 <body>
     <form action="login.php" method="post">
-        <label></label>
-        <input type="text" name="Username" placeholder="">
-        <label></label>
-        <input type="password" name="Password" placeholder="">
-        <select>
-            <option value="doctor">Doctor</option>
-            <option value="patient">Patient</option>
-            <option value="Company">Pharmaceutical</option>
-            <option value="supervisor">supervisor</option>
-            
-        </select>
-        <button type="submit">LOGIN</button>
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        <label>Username:</label>
+    
+                    </td>
+                    <td>
+                        <input type="text" name="Username" placeholder="">
+    
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Password:</label>
+    
+                    </td>
+                    <td>
+                        <input type="password" name="Password" placeholder="">
+    
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="user_type">User type:</label>
+                    </td>
+                    <td>
+                        <select name="user_type" id="user_type">
+                            <option value="doctor">Doctor</option>
+                            <option value="patient">Patient</option>
+                            <option value="phCompany">Pharmaceutical company</option>
+                            <option value="supervisor">Supervisor</option>
+                        </select>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit" name="login">login</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </form>
 </body>
 </html>
+

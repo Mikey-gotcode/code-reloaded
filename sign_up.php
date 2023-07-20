@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['user_type'])) {
         header("Location: add_supervisor.php");
         exit();
     } else {
-        echo '<script>alert("Invalid request made")</script>';
+        echo '<script>alert("'.htmlspecialchars("Invalid request made").'")</script>';
     }
 }
 ?>
