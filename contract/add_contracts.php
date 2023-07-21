@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "./dbcon.php";
+include "dbcon.php";
 
 if (isset($_POST["add"])) {
     // Get the form data
@@ -14,7 +14,7 @@ if (isset($_POST["add"])) {
     // Check if the contract already exists
     $query = "SELECT * FROM contracts WHERE ContractID = ?";
     $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "s", $contractID);
+    mysqli_stmt_bind_param($stmt, "i", $contractID);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 
@@ -25,7 +25,7 @@ if (isset($_POST["add"])) {
         // Insert contract information using prepared statement
         $insert = "INSERT INTO contracts(ContractID, PharmaceuticalCompanyName, PharmacyName, StartDate, EndDate, ContractText) VALUES(?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $insert);
-        mysqli_stmt_bind_param($stmt, "ssssss", $contractID, $phCompanyName, $phName, $startDate, $endDate, $contractText);
+        mysqli_stmt_bind_param($stmt, "isssss", $contractID, $phCompanyName, $phName, $startDate, $endDate, $contractText);
         mysqli_stmt_execute($stmt);
 
         echo '<script>alert("Contract information inserted successfully!")</script>';
@@ -45,7 +45,7 @@ if (isset($_POST["add"])) {
     <title>Add Contracts</title>
 </head>
 <body>
-    <form method="post" action="./add_contracts.php">
+    <form method="post" action="#">
         <h1>Add Contracts</h1>
         <label>Contract ID</label>
         <input type="number" name="ContractID" placeholder="Contract ID" required>

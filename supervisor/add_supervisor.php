@@ -23,9 +23,9 @@ if(isset($_POST["add"])) {
         echo '<script>alert("Contract Already Has a Supervisor")</script>';
     } else {
         // Insert supervisor information using prepared statement
-        $insert = "INSERT INTO supervisor (ContractID, Supervisor) VALUES (?, ?)";
+        $insert = "INSERT INTO supervisor (ContractID, Firstname,Lastname,Username,Password, Phonenumber) VALUES (?, ?,?,?,?,?)";
         $stmt = mysqli_prepare($conn, $insert);
-        mysqli_stmt_bind_param($stmt, "ss", $contractID, $supervisorName);
+        mysqli_stmt_bind_param($stmt, "issssi", $contractID,$sfirstname,$slastname,$username,$password,$phonenumber);
         mysqli_stmt_execute($stmt);
 
         echo '<script>alert("Inserted new supervisor information")</script>';
@@ -43,12 +43,36 @@ if(isset($_POST["add"])) {
     <title>Add Supervisor</title>
 </head>
 <body>
-    <form method="post" action="">
-        <label>Contract ID:</label>
-        <input type="number" name="ContractID" placeholder="Contract ID" required>
-        <label>Supervisor Name:</label>
-        <input type="text" name="SupervisorName" placeholder="Supervisor Name" required>
-        <button type="submit" name="add">ADD SUPERVISOR</button>
+    <div>
+    <form method="post" action="#">
+ <table>
+       <tr>
+          <td><label>Contract ID</label></td>
+          <td><input type="number" name="ContractID" placeholder="SSN" required></td>
+        </tr>
+        <tr>
+          <td> <label>First Name</label></td>
+          <td> <input type="text" name="Firstname" placeholder="First Name"></td>
+        </tr>
+        <tr>
+          <td><label>Last Name</label></td>
+          <td><input type="text" name="Lastname" placeholder="Name" required></td>
+        </tr>
+        <tr>
+          <td><label>Username</label></td>
+          <td><input type="text" name="Username" placeholder="Username" required></td>
+        </tr>
+        <tr>
+          <td><label>Password</label></td>
+          <td><input type="password" name="Password" placeholder="Password"></td>
+        </tr>
+        <tr>
+          <td><label>Phone Number</label></td>
+          <td><input type="number" name="Phonenumber" placeholder="Phone number"></td>
+        </tr>
+     
+    </table>
     </form>
+</div>
 </body>
 </html>
