@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include "dbcon.php";
+include "./dbcon.php";
 
 //check if the user logged in as a doctor
 if(isset($_SESSION['user_type']) && $_SESSION['user_type']=== 'doctor')
@@ -17,7 +17,7 @@ $username=$_SESSION['Username'];
 
 /*function searchPatient($patientName)
 {
-    require("dbcon.php");
+    require("./dbcon.php");
 
     $query="SELECT * FROM patients WHERE Firstname LIKE ? OR Lastname LIKE ? ";
     $stmt=mysqli_prepare($conn,$query);
@@ -47,7 +47,7 @@ $username=$_SESSION['Username'];
 }
 
 function prescribeDrugs($pssn,$dssn,$tradename,$dosage,$price){
-    require("dbcon.php");
+    require("./dbcon.php");
 
     //assuming the drugs table has the correct columns
     $query="INSERT INTO prescriptions () VALUES()";

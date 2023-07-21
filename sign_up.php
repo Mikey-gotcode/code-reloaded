@@ -1,3 +1,4 @@
+
 <?php 
 session_start();
 
@@ -26,8 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sign_up'])) {
 
 
 
+<<<<<<< HEAD
 
 <!DOCTYPE html>
+=======
+>>>>>>> 0d0ad9d470c145c16bb2c4f2435cc6f05d134e43
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -35,8 +39,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sign_up'])) {
     <title>SIGN UP</title>
 </head>
 <body>
+<<<<<<< HEAD
     <form action="sign_up.php" method="post">
         <select name="user_type" id="user_type">
+=======
+    <form action="" method="post">
+        <select>
+>>>>>>> 0d0ad9d470c145c16bb2c4f2435cc6f05d134e43
             <option value="doctor">Doctor</option>
             <option value="patient">Patient</option>
             <option value="phCompany">Pharmaceutical company</option>
@@ -47,4 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sign_up'])) {
     </form>
     
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 0d0ad9d470c145c16bb2c4f2435cc6f05d134e43

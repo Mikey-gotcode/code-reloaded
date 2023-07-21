@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "dbcon.php";
+include "./dbcon.php";
 
 if (isset($_POST["add"])) {
     // Get the form data

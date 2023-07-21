@@ -1,5 +1,5 @@
 /*<?php
-//include('dbcon.php');
+//include('./dbcon.php');
 //include('adminhome.php');
 error_reporting(0);
 
