@@ -4,9 +4,9 @@ include "./dbcon.php";
 
 if (isset($_POST["add"])) {
     // Get the form data
-    $tradeName = $_POST["TradeName"];
-    $formula = $_POST["Formula"];
-    $cpName = $_POST["CompanyName"];
+    $tradeName = $_POST["Tradename"];
+    $formula = $_POST["Formulae"];
+    $cpName = $_POST["Companyname"];
 
     // Check if the drug information already exists
     $query = "SELECT * FROM drugs WHERE TradeName = ?";

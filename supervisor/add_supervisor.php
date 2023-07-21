@@ -5,12 +5,16 @@ include "./dbcon.php";
 if(isset($_POST["add"])) {
     // Get the form data
     $contractID = $_POST['ContractID'];
-    $supervisorName = $_POST['SupervisorName'];
+    $sfirstname = $_POST['Firstname'];
+    $slastname = $_POST['Lastname'];
+    $username = $_POST['Username'];
+    $password = $_POST['Password'];
+    $phonenumber=$_POST['Phonenumber'];
 
     // Check if the contract already has a supervisor
     $query = "SELECT * FROM supervisor WHERE ContractID = ?";
     $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, "s", $contractID);
+    mysqli_stmt_bind_param($stmt, "i", $contractID);
     mysqli_stmt_execute($stmt);
     $result = mysqli_stmt_get_result($stmt);
 

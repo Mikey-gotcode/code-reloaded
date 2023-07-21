@@ -27,12 +27,13 @@ if (isset($_POST["add"])) {
         echo '<script>alert("Doctor already exists")</script>';
     } else {
         // Insert doctor's information using prepared statement
-        $insert = "INSERT INTO doctors(SSN, Firstname,Lastname, Specialty,  Username, Password ,Phonenumber) VALUES(?, ?, ?, ?, ?, ?, ?)";
+        $insert = "INSERT INTO doctors (SSN, Firstname,Lastname, Specialty,  Username, Password ,Phonenumber) VALUES(?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_prepare($conn, $insert);
         mysqli_stmt_bind_param($stmt, "isssssi", $dssn, $fname,$lname, $specialty, $username, $password, $phonenumber);
         mysqli_stmt_execute($stmt);
 
-        echo '<script>alert("'.htmlspecialchars("Doctor information inserted successfully").'")</script>';
+        echo '<script>alert("Doctor information inserted successfully")</script>';
+        header("Location:doctor/doctor_page.php");
     }
 
     mysqli_stmt_close($stmt);
@@ -84,7 +85,7 @@ if (isset($_POST["add"])) {
 <body>
     <div class="formdiv">
         <h3>Add doctors information</h3>
-    <form action="doctor_page.php" method="post">
+    <form action="#" method="post">
         <table>
             <tr>
                 <td> 

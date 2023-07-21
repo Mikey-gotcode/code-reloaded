@@ -8,7 +8,7 @@ if (isset($_POST["add"])) {
     $fname = $_POST['Firstname'];
     $lname = $_POST['Lastname'];
     $address = $_POST['Address'];
-    $age = $_POST['Date-of-birth'];
+    $dob = $_POST['Date-of-birth'];
     $username = $_POST['Username'];
     $password = $_POST['Password'];
     $phonenumber=$_POST['Phonenumber'];

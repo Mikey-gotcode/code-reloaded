@@ -10,7 +10,7 @@ if(isset($_POST["add"])) {
     $drugTName = $_POST['DrugTradeName'];
     $prescriptionDate = $_POST['PrescriptionDate'];
     $quantity = $_POST['Quantity'];
-    $description = $_POST['Description'];
+    $description = $_POST['dosage'];
 
     // Check if the prescription already exists for the patient
     $query = "SELECT * FROM prescription WHERE PrescriptionID = ?";
