@@ -68,6 +68,19 @@ if(isset($_POST["login"]))
 
 
 
+
+
+
+
+    
+
+   
+
+=======
+include "./dbcon.php";
+>>>>>>> 0d0ad9d470c145c16bb2c4f2435cc6f05d134e43
+
+
 ?>
 
 

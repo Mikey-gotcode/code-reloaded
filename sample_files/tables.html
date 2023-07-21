@@ -60,6 +60,15 @@
         }
 
         /* Styles for the user information section */
+
+        .container {
+        display: flex;
+    }
+
+    .sidebar, .user-info {
+        display: inline-block;
+        vertical-align: top;
+    }
         .user-info {
             padding: 20px;
             margin-left:5%;
@@ -89,6 +98,7 @@
   .user-info, .side-bar {
     display:inline-block;
     vertical-align: top;
+    
   }
   .welcome-section{
         display:flex;
@@ -110,47 +120,49 @@
         <a href="#" class="nav-item">Panel Item 4</a>
     </div>
 
-    <div class="sidebar">
-        <h3>Sidebar Heading</h3>
-        <ul>
-            <li><a href="#" class="sidebar-item">Sidebar Item 1</a></li>
-            <li><a href="#" class="sidebar-item">Sidebar Item 2</a></li>
-            <li><a href="#" class="sidebar-item">Sidebar Item 3</a></li>
-            <li><a href="#" class="sidebar-item">Sidebar Item 4</a></li>
-        </ul>
-    </div>
-
-    <div class="user-info">
-        <h4>Account Information</h4>
-        <table>
-            <tr>
-                <td><label>Social Security Number:</label></td>
-                <td><?php echo $row['SSN'];?></td>
-            </tr>
-            <tr>
-                <td><label>First Name:</label></td>
-                <td><?php echo $row['Firstname'];?></td>
-            </tr>
-            <tr>
-                <td><label>Last Name:</label></td>
-                <td><?php echo $row['Lastname'];?></td>
-            </tr>
-            <tr>
-                <td><label>Specialty:</label></td>
-                <td><?php echo $row['Specialty'];?></td>
-            </tr>
-            <tr>
-                <td><label>User Name:</label></td>
-                <td><?php echo $row['Username'];?></td>
-            </tr>
-            <tr>
-                <td><label>Phone Number:</label></td>
-                <td><?php echo $row['Phonenumber'];?></td>
-            </tr>
-            <tr>
-                <td><a href="edit_doctor.php" class="btn">EDIT</a></td>
-            </tr>
-        </table>
+    <div class="container">
+        <div class="sidebar">
+            <h3>Sidebar Heading</h3>
+            <ul>
+                <li><a href="#" class="sidebar-item">Sidebar Item 1</a></li>
+                <li><a href="#" class="sidebar-item">Sidebar Item 2</a></li>
+                <li><a href="#" class="sidebar-item">Sidebar Item 3</a></li>
+                <li><a href="#" class="sidebar-item">Sidebar Item 4</a></li>
+            </ul>
+        </div>
+    
+        <div class="user-info">
+            <h4>Account Information</h4>
+            <table>
+                <tr>
+                    <td><label>Social Security Number:</label></td>
+                    <td><?php echo $_SESSION['SSN'];?></td>
+                </tr>
+                <tr>
+                    <td><label>First Name:</label></td>
+                    <td><?php echo $_SESSION['Firstname'];?></td>
+                </tr>
+                <tr>
+                    <td><label>Last Name:</label></td>
+                    <td><?php echo $_SESSION['Lastname'];?></td>
+                </tr>
+                <tr>
+                    <td><label>Specialty:</label></td>
+                    <td><?php echo $_SESSION['Specialty'];?></td>
+                </tr>
+                <tr>
+                    <td><label>User Name:</label></td>
+                    <td><?php echo $_SESSION['Username'];?></td>
+                </tr>
+                <tr>
+                    <td><label>Phone Number:</label></td>
+                    <td><?php echo $_SESSION['Phonenumber'];?></td>
+                </tr>
+                <tr>
+                    <td><a href="edit_doctor.php" class="btn">EDIT</a></td>
+                </tr>
+            </table>
+        </div>
     </div>
 </body>
 </html>
