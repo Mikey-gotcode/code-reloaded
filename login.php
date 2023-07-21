@@ -1,7 +1,8 @@
 <?php 
 session_start();
-<<<<<<< HEAD
 include "dbcon.php";
+print_r($_POST);
+
 $table='';
     
 
@@ -35,25 +36,26 @@ if(isset($_POST["login"]))
 
         $result=mysqli_query($conn,"SELECT * FROM $table WHERE Username='$username'");
         $row=mysqli_fetch_assoc($result);
-        if(mysqli_num_rows($result)>0){
+        if(mysqli_num_rows($result)>0)
+        {
             if($password==$row['Password'])
             {
                 $_SESSION["login"]=true;
                 $_SESSION["id"]=$row["SSN"];
 
-                if ($user_type == 'doctor') {
+                if ($user_type == 'doctor'){
                     header("Location:doctor/doctor_page.php");
                     exit();
-                } elseif ($user_type == 'patient') {
+                }elseif ($user_type == 'patient'){
                     header("Location: patient/patient.php");
                     exit();
-                }elseif ($user_type == 'supervisor') {
+                }elseif ($user_type == 'supervisor'){
                     header("Location: supervisor/supervisor.php");
                     exit();
-                }  elseif($user_type == 'admin') {
+                }elseif($user_type == 'admin'){
                     header("Location: ");
                     exit();
-                } else {
+                }else{
                     echo '<script>alert("User already exists or password is incorrect")</script>';
                 }
             }
@@ -66,20 +68,8 @@ if(isset($_POST["login"]))
 
 
 
-
-
-
-
-    
-
-   
-
-=======
-include "./dbcon.php";
->>>>>>> 0d0ad9d470c145c16bb2c4f2435cc6f05d134e43
-
-
 ?>
+
 
 
 

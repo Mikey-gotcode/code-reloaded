@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "./dbcon.php";
+include "dbcon.php";
 
 if (isset($_POST["add"])) {
     // Get the form data
@@ -36,7 +36,7 @@ if (isset($_POST["add"])) {
     }
 
     mysqli_stmt_close($stmt);
-    header("Location:");
+    header("Location:login.php");
 }
 
 ?>
