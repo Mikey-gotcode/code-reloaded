@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php 
 session_start();
 
@@ -21,3 +22,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['user_type'])) {
     }
 }
 ?>
+
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGN UP</title>
+</head>
+<body>
+    <form action="" method="post">
+        <select>
+            <option value="doctor">Doctor</option>
+            <option value="patient">Patient</option>
+            <option value="phCompany">Pharmaceutical company</option>
+            <option value="supervisor">Supervisor</option>
+        </select>
+        <br><br>
+        <button type="submit" name="sign_up">SIGN UP</button>
+    </form>
+    
+</body>
+</html>

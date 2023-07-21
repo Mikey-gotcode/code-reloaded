@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "dbcon.php";
+include "./dbcon.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["edit"])) {
     // Get the form data

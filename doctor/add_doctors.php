@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "dbcon.php";
+include "./dbcon.php";
 
 if (isset($_POST["add"])) {
     // Get the form data
@@ -83,7 +83,7 @@ if (isset($_POST["add"])) {
 <body>
     <div class="formdiv">
         <h3>Add doctors information</h3>
-    <form action="#" method="post">
+    <form action="doctor_page.php" method="post">
         <table>
             <tr>
                 <td> 

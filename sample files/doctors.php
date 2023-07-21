@@ -2,7 +2,7 @@
 
 
 <?php
-require "dbcon.php";
+require "./dbcon.php";
 
 // Check if the success message is set
 session_start();

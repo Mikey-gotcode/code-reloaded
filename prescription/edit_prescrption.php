@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "dbcon.php";
+include "./dbcon.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["edit"])) {
     // Get the form data
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["edit"])) {
     <title>Edit Prescription Information</title>
 </head>
 <body>
-    <form action="update_prescription.php" method="post">
+    <form action="edit_prescription.php" method="post">
         <h1>Edit Prescription Information</h1>
         <label>Prescription ID:</label>
         <input type="number" name="PrescriptionID" placeholder="Prescription ID" required>
