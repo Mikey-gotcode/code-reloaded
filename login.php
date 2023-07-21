@@ -1,28 +1,80 @@
 <?php 
 session_start();
 include "dbcon.php";
+$table='';
+    
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
-    $user_type = $_POST['user_type'];
-    $userName = $_POST['Username'];
-    $passWord = $_POST['Password'];
 
-    if ($user_type == 'doctor') {
-        header("Location:doctor/doctor_page.php");
-        exit();
-    } elseif ($user_type == 'patient') {
-        header("Location: patient.php");
-        exit();
-    } elseif ($user_type == 'phCompany') {
-        header("Location: pharmaceuticalCompany.php");
-        exit();
-    } elseif ($user_type == 'supervisor') {
-        header("Location: supervisor.php");
-        exit();
-    } else {
-        echo '<script>alert("User type not selected")</script>';
-    }
-}
+if(isset($_POST["login"]))
+{
+        $username=$_POST["Username"];
+        $password=$_POST['Password'];
+        $user_type=$_POST['user_type'];
+
+        if($user_type=='doctor'){
+            $table='doctors';
+    
+        }elseif($user_type=='patient'){
+            $table='patients';
+    
+        }elseif($user_type=='supervisor'){
+            $table='supervisors';
+            
+        }elseif($user_type=='pharmacist'){
+            $table='pharmacists';
+            
+        }elseif($user_type=='admin'){
+            $table='admin';
+            
+        }
+
+
+
+
+
+        $result=mysqli_query($conn,"SELECT * FROM $table WHERE Username='$username'");
+        $row=mysqli_fetch_assoc($result);
+        if(mysqli_num_rows($result)>0){
+            if($password==$row['Password'])
+            {
+                $_SESSION["login"]=true;
+                $_SESSION["id"]=$row["SSN"];
+
+                if ($user_type == 'doctor') {
+                    header("Location:doctor/doctor_page.php");
+                    exit();
+                } elseif ($user_type == 'patient') {
+                    header("Location: patient/patient.php");
+                    exit();
+                }elseif ($user_type == 'supervisor') {
+                    header("Location: supervisor/supervisor.php");
+                    exit();
+                }  elseif($user_type == 'admin') {
+                    header("Location: ");
+                    exit();
+                } else {
+                    echo '<script>alert("User already exists or password is incorrect")</script>';
+                }
+            }
+
+
+
+            }
+
+        }
+
+
+
+
+
+
+
+    
+
+   
+
+
+
 ?>
 
 
@@ -35,17 +87,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIN</title>
     <style>
+        
+
 
     </style>
     
 </head>
 <body>
+    
+<div>
     <form action="#" method="post">
-        <div>
-            <table>
+        <h3>BLISS MEDICAL</h3>
+        <img src="" alt="">
+        <table>
                 <tr>
                     <td>
-                        <label for="Password">Username:</label>
+                        <label for="username">Username:</label>
     
                     </td>
                     <td>
@@ -55,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                 </tr>
                 <tr>
                     <td>
-                        <label for="Password">Password:</label>
+                        <label for="password">Password:</label>
     
                     </td>
                     <td>
@@ -79,12 +136,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                 </tr>
                 <tr>
                     <td>
-                        <button type="submit" name="login">login</button>
+                        <button type="submit" name=login>login</button>
                     </td>
                 </tr>
             </table>
-        </div>
+            <br><br>
+       
     </form>
+</div>
 </body>
 </html>
 

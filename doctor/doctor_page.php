@@ -15,7 +15,7 @@ $username=$_SESSION['Username'];
 
 
 
-function searchPatient($patientName)
+/*function searchPatient($patientName)
 {
     require("dbcon.php");
 
@@ -69,7 +69,7 @@ if(isset($_FILES['']))
 
 
 
-}
+}*/
 
 ?>
 
